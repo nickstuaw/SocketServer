@@ -24,9 +24,9 @@ public class Server extends Thread {
 
         this.terminal = TerminalBuilder.terminal();
 
-        lineReader.printAbove("Starting up...");
+        lineReader.printAbove("Starting up on port 39999...");
 
-        SERVER_SOCKET = new ServerSocket(25590);
+        SERVER_SOCKET = new ServerSocket(39999);
 
         this.start();
 

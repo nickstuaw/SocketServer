@@ -14,7 +14,7 @@ public class Server {
 
     private static boolean terminating = false;
 
-    public Server(final String ip, final int port) throws IOException {
+    public Server(String ip, int port) throws IOException {
 
         Terminal terminal;
         LineReader lineReader;
@@ -23,11 +23,20 @@ public class Server {
                 .terminal(terminal)
                 .build();
 
+        String newIp = lineReader.readLine("IP (leave blank for localhost): ");
+        if(!newIp.isEmpty()) {
+            ip = newIp;
+        }
+        String newPort = lineReader.readLine("Port (leave blank for 39999): ");
+        if(!newPort.isEmpty()) {
+            port = Integer.parseInt(newPort);
+        }
         Socket s;
         try {
             s = new Socket(ip, port);
         } catch(ConnectException ex) {
             lineReader.printAbove("Connection refused.");
+            ex.printStackTrace();
             return;
         }
 
