@@ -7,11 +7,10 @@ import org.jline.terminal.Terminal;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.util.logging.Logger;
+import java.net.SocketException;
+import java.util.Arrays;
 
 public class Client extends Thread {
-
-    private final Logger log = Main.getLogger();
 
     private final Socket socket;
     private final LineReader lineReader;
@@ -60,8 +59,9 @@ public class Client extends Thread {
 
             socket.close();
 
+        } catch (SocketException ignored) {
         } catch (Exception e) {
-            System.out.println("Error occured " +e.getStackTrace());
+            System.out.println("Error occured " + Arrays.toString(e.getStackTrace()));
             e.printStackTrace();
         }
     }
